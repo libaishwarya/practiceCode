@@ -34,10 +34,8 @@ def select():
 
 def update():
     res = con.cursor()
-    sql = "select name from students WHERE id = %s "
+    sql = "select * from students WHERE id = %s "
     id = int(input("Enter the ID: "))
-    # sql = "UPDATE students SET name = %s WHERE id = %s;"
-    # id = int(input("Enter the Id to be changed: "))
     res.execute(sql,[id,])
     result = res.fetchone()
     con.commit()
@@ -45,27 +43,29 @@ def update():
     def updateName():
         res = con.cursor()
         sql = "UPDATE students SET name = %s WHERE id = %s;"
-        id = int(input("Enter the Id to be changed: "))
+        # id = int(input("Enter the Id to be changed: "))
         name = str(input("Enter the name to be changed: "))
         res.execute(sql,(name,id))
         result = res.fetchall()
         con.commit()
         print(result)
         
+        
     def updateEmail():
         res = con.cursor()
         sql = "UPDATE students SET email = %s WHERE id = %s;"
-        id = int(input("Enter the Id to be changed: "))
+        # id = int(input("Enter the Id to be changed: "))
         email = str(input("Enter the emailID to be changed: "))
         res.execute(sql,(email,id))
         result = res.fetchall()
         con.commit()
         print(result)
         
+        
     def updatePhone():
         res = con.cursor()
         sql = "UPDATE students SET phone = %s WHERE id = %s;"
-        id = int(input("Enter the Id to be changed: "))
+        # id = int(input("Enter the Id to be changed: "))
         phone = str(input("Enter the phone number to be changed: "))
         res.execute(sql,(phone,id))
         result = res.fetchall()
@@ -110,4 +110,3 @@ while True:
         else:
             print("Invalid choice")
             
-        
