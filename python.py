@@ -5,7 +5,7 @@ def insert():
     
     Name = input("Enter the name: ")
     Email = input("Enter the emailID: ")
-    Phone = input("Enter the phone number: ")
+    Phone = input("Enter the phone number : ")
     
     res = con.cursor()
     sql ="insert into students(name,email,phone) values(%s,%s,%s)"
