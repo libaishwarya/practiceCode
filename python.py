@@ -2,6 +2,7 @@ import mysql.connector
 con = mysql.connector.connect(host="localhost",user="root", password="PASSWORD",database="CRUD")
 
 def insert():
+    
     Name = input("Enter the name: ")
     Email = input("Enter the emailID: ")
     Phone = input("Enter the phone number: ")
@@ -9,9 +10,13 @@ def insert():
     res = con.cursor()
     sql ="insert into students(name,email,phone) values(%s,%s,%s)"
     res.execute(sql,(Name,Email,Phone))
+    res.execute("select last_insert_id()")
+    studentID = res.fetchone()[0]
     con.commit()
     print("\n")
-    print("Student data inserted")
+    print("Student data inserted ")
+    print("\n")
+    print("Student ID is",studentID)
     
 def select():
     res = con.cursor()
