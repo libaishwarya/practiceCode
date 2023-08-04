@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector,jsonify , json
 con = mysql.connector.connect(host="localhost",user="root", password="PASSWORD",database="CRUD")
 
 def insert():
@@ -13,7 +13,6 @@ def insert():
     res.execute("select last_insert_id()")
     studentID = res.fetchone()[0]
     con.commit()
-    print("\n")
     print("Student data inserted ")
     print("\n")
     print("Student ID is",studentID)
@@ -25,12 +24,15 @@ def select():
     res.execute(sql,(id,))
     result = res.fetchone()
     con.commit()
-    print(result)
-    
+    if result:
+        keys = ['Name', 'Email', 'Phone']
+        result_dict = dict(zip(keys, result))
+        json_data = json.dumps(result_dict)
+        print (json_data)
     # if result:
-    #     print(result[0])
-    #     print(result[1])
-    #     print(result[2])
+    #     print("Name:",result[0])
+    #     print("Email:",result[1])
+    #     print("Phone:",result[2])
 
 def update():
     res = con.cursor()
@@ -48,8 +50,7 @@ def update():
         res.execute(sql,(name,id))
         result = res.fetchall()
         con.commit()
-        print(result)
-        
+        print(result) 
         
     def updateEmail():
         res = con.cursor()
@@ -60,8 +61,7 @@ def update():
         result = res.fetchall()
         con.commit()
         print(result)
-        
-        
+            
     def updatePhone():
         res = con.cursor()
         sql = "UPDATE students SET phone = %s WHERE id = %s;"
