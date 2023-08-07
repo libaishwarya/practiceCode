@@ -9,7 +9,7 @@ def create():
     user_email = request.json['email']
     user_phone = request.json['phone']
     cur = con.cursor()
-    sql = "insert into students(name,email,phone) values(%s,%s,%s)"
+    sql = "INSERT INTO students(name,email,phone) VALUE(%s,%s,%s)"
     cur.execute(sql, (user_name, user_email, user_phone))
     cur.execute("select last_insert_id()")
     studentID = cur.fetchone()[0]
@@ -23,5 +23,13 @@ def create():
         }
     ),201
 
+@app.route('/user/<int:id>',methods = ["GET"])
+def view_details(id):
+        cur = con.cursor()
+        sql = "SELECT * FROM students WHERE id = %s "
+        cur.execute(sql, (id,))
+        result = cur.fetchall()
+        return f"User Details: {result}",200
+    
 if __name__ == "__main__":
     app.run(debug=True)
